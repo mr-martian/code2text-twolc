@@ -28,22 +28,22 @@ base_rules = [
     },
     {
         'pattern': '(alphabet (symbol) @root_text)',
-        'output': 'The symbol {root_text} remains unchanged',
+        'output': 'An underlying {root_text} remains unchanged (surfaces as {root_text})',
     },
     {
         'pattern': '(alphabet (symbol_pair left: (symbol) @l_text right: (symbol) @r_text) @root (#eq? @r_text "0"))',
-        'output': 'The symbol {l_text} is deleted',
+        'output': 'An underlying {l_text} is deleted',
     },
     {
         'pattern': '(alphabet (symbol_pair left: (symbol) @l_text right: (symbol) @r_text) @root)',
-        'output': 'The symbol {l_text} is changed to {r_text}',
+        'output': 'An underlying {l_text} surfaces as {r_text}',
     },
     {
         'pattern': '(sets (set) @set_list) @root',
         'output': [
             {
                 'lists': {'set_list': {'join': '\n', 'html_type': 'ul'}},
-                'output': 'We define the following sets of mappings:\n{set_list}',
+                'output': 'We define the following sets of symbols:\n{set_list}',
             }
         ],
     },
@@ -126,19 +126,19 @@ base_rules = [
     },
     {
         'pattern': '((symbol_pair left: (symbol) @l right: (symbol) @r) @root (#eq? @r "0"))',
-        'output': '{l} which is deleted',
+        'output': 'an underlying {l} which is deleted',
     },
     {
         'pattern': '(symbol_pair left: (symbol) @l right: (symbol) @r) @root',
-        'output': '{l} which becomes {r}',
+        'output': 'an underlying {l} which surfaces as {r}',
     },
     {
         'pattern': '(symbol_pair right: (symbol) @r) @root',
-        'output': 'any symbol which becomes {r}',
+        'output': 'a symbol whose surface form is {r}',
     },
     {
         'pattern': '(symbol_pair left: (symbol) @l) @root',
-        'output': '{l} which becomes anything',
+        'output': 'a symbol whose underlying form is {l}',
     },
     {'pattern': '((bool_op) @root (#eq? @root "|"))', 'output': 'or'},
     {'pattern': '((bool_op) @root (#eq? @root "&"))', 'output': 'and'},
@@ -146,15 +146,15 @@ base_rules = [
     {'pattern': '(locus) @root', 'output': 'the locus of the rule'},
     {
         'pattern': '(context left: (pattern) @l (locus) @_ right: (pattern) @r) @root',
-        'output': '{l}, {_}, {r}',
+        'output': 'it is preceded by {l} and followed by {r}',
     },
     {
         'pattern': '(context (locus) @_ right: (pattern) @r) @root',
-        'output': '{_}, {r}',
+        'output': 'it is followed by {r}',
     },
     {
         'pattern': '(context left: (pattern) @l (locus) @_) @root',
-        'output': '{l}, {_}',
+        'output': 'it is preceded by {l}',
     },
     {
         'pattern': '(context (locus) @_) @root',
